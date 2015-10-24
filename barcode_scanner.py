@@ -18,3 +18,6 @@ class BarcodeScanner():
 				else:
 					if num_val > 29 and num_val < 40:
 						barcode += str((num_val +1) % 10)
+	
+	def cleanup(self):
+		self.fp.close()
