@@ -11,7 +11,7 @@ on the usb scale.
 class Scale(object):
 	"""
 	Object for a weighting scale. 
-	Exposes onle 1 method i.e., to get weight of an item put on the scale.
+	Classes using this object should only use one method i.e., to get weight of an item put on the scale.
 	@link{get_weight} can be used to get the weight.
 	"""
 	def __init__(self, dev="/dev/usb/hiddev0"):
@@ -22,6 +22,7 @@ class Scale(object):
 		self.scale_factor = 2.67
 	
 	"""
+	Takes an initial reading and sets that as the relative 0.
 	"""
 	def calibrate(self):
 		for _ in range(5):
@@ -34,8 +35,7 @@ class Scale(object):
 		self.calibrate = True
 		return name, base_small, base_large
 
-	"""
-	"""
+	""" Gets one sample of weight. """
 	def get_weight(self):
 		print "sampling"
 		scale_factor = self.scale_factor
@@ -55,10 +55,8 @@ class Scale(object):
 			small = (small - base_small) / scale_factor
 	  final = large + small
 	  return final
-
 	
-	"""
-	"""
+	""" Gets @link{self.samples} for weighing and returns the one that has max confidence level. """
 	def get_sampled_weight(self):
 		sample = []
 		for _ in range(5):
@@ -66,8 +64,7 @@ class Scale(object):
 		print sample
 		return max(sample)
 	 
-	"""
-	"""
+	""" Reads the usb channel for the scale and converts bytes into readable primitives. """
 	def read_hid_usb(self):
 		def _IOC(iodir, iotype, ionr, iosize):
 			return (iodir << 30) | (iotype << 8) | (ionr << 0) | (iosize << 16)
