@@ -18,13 +18,15 @@ class Scale(object):
 		self.fd = os.open(dev, os.O_RDONLY)
 		self.dev = dev
 		self.calibrated = False
-		self.name, self.base_small, this.base_large = self.calibrate()
+		self.name, self.base_small, self.base_large = self.calibrate()
 		self.scale_factor = 2.67
 	
 	"""
 	Takes an initial reading and sets that as the relative 0.
 	"""
 	def calibrate(self):
+		smalls = []
+		larges = []
 		for _ in range(5):
 			name, small, large = self.read_hid_usb()
 			smalls.append(small)
@@ -32,6 +34,7 @@ class Scale(object):
 		base_small = max(smalls)
 		base_large = max(larges)
 		print "Calibrated..."
+		print base_small, base_large
 		self.calibrate = True
 		return name, base_small, base_large
 
@@ -41,7 +44,8 @@ class Scale(object):
 		scale_factor = self.scale_factor
 		base_large = self.base_large
 		base_small = self.base_small
-		name, small, large = self.open_hid()
+		name, small, large = self.read_hid_usb()
+		print small, large
 		if large < base_large + 1:
 			large = 0
 		else:
@@ -53,8 +57,8 @@ class Scale(object):
 				small = 0
 		else:
 			small = (small - base_small) / scale_factor
-	  final = large + small
-	  return final
+	  	final = large + small
+	  	return final
 	
 	""" Gets @link{self.samples} for weighing and returns the one that has max confidence level. """
 	def get_sampled_weight(self):
