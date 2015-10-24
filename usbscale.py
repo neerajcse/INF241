@@ -84,8 +84,8 @@ class Scale(object):
 		input_small = ev[7][1]
 		return name, input_small % 256, input_large % 256
 
-	def cleanup():
-		self.fd.close()
+	def cleanup(self):
+		os.close(self.fd)
 
 if __name__ == "__main__":
   scale = Scale()

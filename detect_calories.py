@@ -11,7 +11,7 @@ if __name__ == "__main__":
 		barcode = scanner.read_next_barcode()
 		scale = Scale()
 		weight = scale.get_sampled_weight()
-		scale.cleaup()
+		scale.cleanup()
 		print "Barcode : " + str(barcode)
 		print "Weight  : " + str(weight)
 	except KeyboardInterrupt:
