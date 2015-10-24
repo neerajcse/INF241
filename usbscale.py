@@ -63,6 +63,7 @@ class Scale(object):
 	def get_sampled_weight(self):
 		sample = []
 		for _ in range(5):
+			time.sleep(1)
 			sample.append(self.get_weight())
 		return max(sample)
 	 

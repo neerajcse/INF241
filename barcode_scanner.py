@@ -16,5 +16,5 @@ class BarcodeScanner():
 				if num_val == 40:
 					return barcode
 				else:
-				if num_val > 29 and num_val < 40:
-					barcode += str((num_val +1) % 10)
+					if num_val > 29 and num_val < 40:
+						barcode += str((num_val +1) % 10)
