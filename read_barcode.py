@@ -15,6 +15,7 @@ def read_next_barcode():
       else:
         if num_val > 29:
           barcode += str((num_val +1) % 10)
+  return barcode
 
 try:
   while 1:
