@@ -6,7 +6,8 @@ import requests
 
 if __name__ == "__main__":
 	scanner = BarcodeScanner()
-	url = "http://dweet.io/dweet/for/inf241_barcode_reader?barcode={0}&weight={1}"
+	"""url = "http://dweet.io/dweet/for/inf241_barcode_reader?barcode={0}&weight={1}"""
+	url = "https://powerful-forest-7649.herokuapp.com/calories?barcode={0}&weight={1}"
 	try:
 	  while 1:
 		print 'reading next'
