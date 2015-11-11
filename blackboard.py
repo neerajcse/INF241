@@ -2,7 +2,7 @@ from multiprocessing.connection import Listener
 from array import array
 import sys
 
-address = ('localhost', 6000)     # family is deduced to be 'AF_INET'
+address = ('localhost', 6000)
 listener = Listener(address)
 
 key_store = {}
