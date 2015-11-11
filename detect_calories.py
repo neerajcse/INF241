@@ -4,6 +4,12 @@ from barcode_scanner import BarcodeScanner
 from usbscale import Scale
 import requests
 
+def get_weight_from_blackboard():
+    return "10"
+    
+def get_user_from_blackboard():
+    return "user"
+
 if __name__ == "__main__":
 	scanner = BarcodeScanner()
 	"""url = "http://dweet.io/dweet/for/inf241_barcode_reader?barcode={0}&weight={1}"""
@@ -12,16 +18,13 @@ if __name__ == "__main__":
 	  while 1:
 		print 'reading next'
 		barcode = scanner.read_next_barcode()
-		scale = Scale()
-		weight = scale.get_sampled_weight()
-		scale.cleanup()
+        weight = get_weight_from_blackboard()
+        user = get_user_from_blackboard()
 		print "Barcode : " + str(barcode)
 		print "Weight  : " + str(weight)
+        print "User    : " + str(user)
 		requests.get(url.format(barcode, weight))
 	except KeyboardInterrupt:
 	  print 'Exiting...'
 	  scanner.cleanup()
 	  sys.exit(0)
-
-
-
