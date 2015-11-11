@@ -18,21 +18,20 @@ upper = np.array([20, 255, 255], dtype = "uint8")
 
 # if a video path was not supplied, grab the reference
 # to the gray
-if not args.get("video", False):
-	camera = cv2.VideoCapture(0)
-else:
-	camera = cv2.VideoCapture(args["video"])
-
+current_channel = 0
 try:
 	#keep looping over the frames in the video
 	while True:
+		camera = cv2.VideoCapture(current_channel)
 		# grab the current frame
 		(grabbed, frame) = camera.read()
+		
 	 
 		# if we are viewing a video and we did not grab a
 		# frame, then we have reached the end of the video
-		if args.get("video") and not grabbed:
-			break
+		if not grabbed:
+			current_channel = (current_channel + 1) % 2
+			continue
 	 
 		# resize the frame, convert it to the HSV color space,
 		# and determine the HSV pixel intensities that fall into
@@ -56,10 +55,8 @@ try:
 		#cv2.imshow("images", np.hstack([frame, skin]))
 		cv2.imwrite("/home/neeraj/Dropbox/Camera Uploads/my_img.png", skin)
 		time.sleep(1)
+		camera.release()
 except KeyboardInterrupt:
 	camera.release()
-	cv2.destroyAllWindows()	
- 
-# cleanup the camera and close any open windows
-camera.release()
+
 cv2.destroyAllWindows()
