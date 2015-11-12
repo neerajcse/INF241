@@ -1,11 +1,12 @@
 from multiprocessing.connection import Client
 from array import array
+from usbscale import Scale
+import time
 
 address = ('localhost', 6000)
 
 def send_weight_to_blackboard(weight):
     conn = Client(address)
-    conn.send('exit')
     conn.send('PUT:weight,' + str(weight))
     conn.send('close')
     conn.close()
