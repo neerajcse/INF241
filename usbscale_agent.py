@@ -14,9 +14,13 @@ def send_weight_to_blackboard(weight):
 if __name__ == "__main__":
   scale = Scale()
   try:
+    history = list()
     while True:
         weight = scale.get_weight()
-        send_weight_to_blackboard(weight)
+        history.append(weight)
+        if len(history) > 6:
+            history.pop()
+        send_weight_to_blackboard(max(history))
         time.sleep(0.5)
   except KeyboardInterrupt:
     print("Exiting...")

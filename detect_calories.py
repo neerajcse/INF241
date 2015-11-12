@@ -4,8 +4,16 @@ from barcode_scanner import BarcodeScanner
 from usbscale import Scale
 import requests
 
+def get_data_from_dashboard(key):
+    conn = Client(address)
+    conn.send('GET:' + str(key))
+    data = conn.recv()
+    conn.send('close')
+    conn.close()
+    return data
+
 def get_weight_from_blackboard():
-    return "10"
+    return get_data_from_dashboard('weight')
     
 def get_user_from_blackboard():
     return "user"
