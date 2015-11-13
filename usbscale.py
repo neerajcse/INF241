@@ -19,7 +19,7 @@ class Scale(object):
 		self.dev = dev
 		self.calibrated = False
 		self.name, self.base_small, self.base_large = self.calibrate()
-		self.scale_factor = 2.67
+		self.scale_factor = 9.61
 	
 	"""
 	Takes an initial reading and sets that as the relative 0.

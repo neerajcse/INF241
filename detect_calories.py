@@ -3,6 +3,9 @@ import time
 from barcode_scanner import BarcodeScanner
 from usbscale import Scale
 import requests
+from multiprocessing.connection import Client
+
+address = ('localhost', 6000)
 
 def get_data_from_dashboard(key):
     conn = Client(address)
@@ -26,11 +29,11 @@ if __name__ == "__main__":
 	  while 1:
 		print 'reading next'
 		barcode = scanner.read_next_barcode()
-        weight = get_weight_from_blackboard()
-        user = get_user_from_blackboard()
+                weight = get_weight_from_blackboard()
+                user = get_user_from_blackboard()
 		print "Barcode : " + str(barcode)
 		print "Weight  : " + str(weight)
-        print "User    : " + str(user)
+                print "User    : " + str(user)
 		requests.get(url.format(barcode, weight))
 	except KeyboardInterrupt:
 	  print 'Exiting...'
