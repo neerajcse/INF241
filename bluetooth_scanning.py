@@ -10,7 +10,8 @@ user1_devices = ['60:6C:66:03:04:ED']
 def write_to_file(nearby_devices):
   with open("devices.txt", "w") as f:
     for device in nearby_devices:
-      print(device)
+      if device in user1_devices:
+        print("User 1")
 
 def update_blackboard(nearby_devices):
     conn = Client(address)
@@ -26,5 +27,5 @@ def update_blackboard(nearby_devices):
 while True:
   nearby_devices = bluetooth.discover_devices(lookup_names = False, duration=2)
   print("found %d devices" % len(nearby_devices))
-  write_to_file(nearby_devices)
+  update_blackboard(nearby_devices)
   time.sleep(0.01)

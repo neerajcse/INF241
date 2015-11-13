@@ -21,6 +21,12 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
+sudo python bluetooth_scanning.py > /dev/null &
+if [ $? -ne 0 ]; then
+  echo "Could not start bluetooth services"
+  exit 1
+fi
+
 sudo python detect_calories.py
 
 #TODO: Add a exit hook to kill all python services.

@@ -19,12 +19,12 @@ def get_weight_from_blackboard():
     return get_data_from_dashboard('weight')
     
 def get_user_from_blackboard():
-    return "user"
+    return get_data_from_dashboard("user")
 
 if __name__ == "__main__":
 	scanner = BarcodeScanner()
 	"""url = "http://dweet.io/dweet/for/inf241_barcode_reader?barcode={0}&weight={1}"""
-	url = "http://powerful-forest-7649.herokuapp.com/calories?barcode={0}&weight={1}"
+	url = "http://powerful-forest-7649.herokuapp.com/calories?barcode={0}&weight={1}&user={2}"
 	try:
 	  while 1:
 		print 'reading next'
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 		print "Barcode : " + str(barcode)
 		print "Weight  : " + str(weight)
                 print "User    : " + str(user)
-		requests.get(url.format(barcode, weight))
+		requests.get(url.format(barcode, weight, user))
 	except KeyboardInterrupt:
 	  print 'Exiting...'
 	  scanner.cleanup()
